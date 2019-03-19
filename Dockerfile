@@ -6,7 +6,7 @@ FROM centos:7
 LABEL maintainer="TestUser"
 
 RUN yum install epel-release -y
-Run yum install nginx -y
+RUN yum install nginx -y
 RUN yum install nodejs -y
 
 ENV API_KEY "**None**"
