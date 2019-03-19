@@ -2,11 +2,12 @@
 # We don't declare them here — take a look at our docs.
 # https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/configuration.md
 
-FROM nginx:1.15-alpine
+FROM centos:7
+LABEL maintainer="TestUser"
 
-RUN apk --no-cache add nodejs
-
-LABEL maintainer="fehguy"
+RUN yum install epel-release -y
+Run yum install nginx -y
+RUN yum install nodejs -y
 
 ENV API_KEY "**None**"
 ENV SWAGGER_JSON "/app/swagger.json"
