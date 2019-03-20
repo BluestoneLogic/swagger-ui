@@ -18,12 +18,12 @@ ENV PORT 8080
 ENV BASE_URL ""
 
 RUN chown -R 1001:0 /etc/nginx \
-	&& chown -R 1001:0 /usr/share/nginx \
+	&& chown -R 1001:0 /usr/share/nginx/html \
 	&& chown -R 1001:0 /var/lib/nginx \
 	&& chown -R 1001:0 /etc/nginx \
 	&& chown -R 1001:0 run.sh \
 	&& chown -R 1001:0 /run \
-	&& chmod -R g=u /usr/share/nginx \
+	&& chmod -R g=u /usr/share/nginx/html \
 	&& chmod -R g=u /var/lib/nginx \
 	&& chmod -R g=u /etc/nginx \
 	&& chmod -R g=u run.sh \
