@@ -17,12 +17,24 @@ ENV SWAGGER_JSON "/app/swagger.json"
 ENV PORT 8080
 ENV BASE_URL ""
 
-RUN chown -R 1001:0 /etc/nginx \
+COPY ./docker/nginx.conf ./docker/cors.conf /etc/nginx/
+
+# copy swagger files to the `/js` folder
+COPY ./dist/* /usr/share/nginx/html/
+# COPY ./docker/run.sh /usr/share/nginx/
+COPY ./docker/configurator /usr/share/nginx/configurator
+
+RUN ls -al /usr/share/nginx/html
+
+RUN chmod +x /run.sh
+
+RUN chown -R 1001:0 /usr/share/nginx/configurator \
 	&& chown -R 1001:0 /usr/share/nginx/html \
 	&& chown -R 1001:0 /var/lib/nginx \
 	&& chown -R 1001:0 /etc/nginx \
 	&& chown -R 1001:0 run.sh \
 	&& chown -R 1001:0 /run \
+	&& chmod -R g=u /usr/share/nginx/configurator
 	&& chmod -R g=u /usr/share/nginx/html \
 	&& chmod -R g=u /var/lib/nginx \
 	&& chmod -R g=u /etc/nginx \
@@ -42,14 +54,6 @@ RUN touch /var/log/nginx/error.log \
 
 RUN chmod g=u /etc/passwd
 
-COPY ./docker/nginx.conf ./docker/cors.conf /etc/nginx/
-
-# copy swagger files to the `/js` folder
-COPY ./dist/* /usr/share/nginx/html/
-# COPY ./docker/run.sh /usr/share/nginx/
-COPY ./docker/configurator /usr/share/nginx/configurator
-
-RUN chmod +x /run.sh
 
 EXPOSE 8080
 
