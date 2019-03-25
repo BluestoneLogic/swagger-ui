@@ -24,8 +24,6 @@ COPY ./dist/* /usr/share/nginx/html/
 # COPY ./docker/run.sh /usr/share/nginx/
 COPY ./docker/configurator /usr/share/nginx/configurator
 
-RUN ls -al /usr/share/nginx/html
-
 RUN chmod +x /run.sh
 
 RUN chown -R 1001:0 /usr/share/nginx/configurator \
@@ -44,10 +42,8 @@ RUN chown -R 1001:0 /usr/share/nginx/configurator \
 RUN touch /var/log/nginx/error.log \
     && touch /var/log/nginx/access.log \
     && chown -R 1001:0 /var/log/nginx \
-    && chown -R 1001:0 /var/log/nginx \
     && chown -R 1001:0 /var/log/nginx/error.log \
     && chown -R 1001:0 /var/log/nginx/access.log \
-    && chmod -R g=u /var/log/nginx \
     && chmod -R g=u /var/log/nginx \
     && chmod -R g=u /var/log/nginx/error.log \
     && chmod -R g=u /var/log/nginx/access.log
